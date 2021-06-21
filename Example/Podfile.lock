@@ -1,0 +1,27 @@
+PODS:
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+  - WDTouchID (0.1.0)
+
+DEPENDENCIES:
+  - FBSnapshotTestCase
+  - WDTouchID (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - FBSnapshotTestCase
+
+EXTERNAL SOURCES:
+  WDTouchID:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  WDTouchID: ad4ab201b49ed432bae11dd92a5a5213b871f521
+
+PODFILE CHECKSUM: de6f781569d0d14f1955705a9bad2f41dd27dd05
+
+COCOAPODS: 1.10.0
