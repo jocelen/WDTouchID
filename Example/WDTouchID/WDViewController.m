@@ -44,7 +44,7 @@
 
 - (void)touchVerification {
     
-    [WDTouchID showTouchIDWithDescribe:@"生物识别测试" blockState:^(WDBiometryState state, NSError *error) {
+    [WDTouchID showTouchIDWithDescribe:@"生物识别测试" FaceIDDescribe:nil AuthFallbackTitle:nil blockState:^(WDBiometryState state, NSError *error) {
         
         if (state == WDBiometryStateNotSupport) {    //不支持TouchID
             

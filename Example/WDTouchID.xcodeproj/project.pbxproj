@@ -59,13 +59,13 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		6C8B6F6048F472FB023079E4 /* WDTouchID.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = WDTouchID.podspec; path = ../WDTouchID.podspec; sourceTree = "<group>"; };
+		6C8B6F6048F472FB023079E4 /* WDTouchID.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WDTouchID.podspec; path = ../WDTouchID.podspec; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		7BD8E4BF982F3EB155004C91 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		7BD8E4BF982F3EB155004C91 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		949A233552432E4167FB5B4C /* Pods_WDTouchID_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WDTouchID_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B293C6DF6C09C1D8BA844E7A /* Pods_WDTouchID_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WDTouchID_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA9E33734B4C72DFDC797A7A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		BA9E33734B4C72DFDC797A7A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D43727954027F9B43D597CD2 /* Pods-WDTouchID_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WDTouchID_Tests.debug.xcconfig"; path = "Target Support Files/Pods-WDTouchID_Tests/Pods-WDTouchID_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,7 +193,6 @@
 				D43727954027F9B43D597CD2 /* Pods-WDTouchID_Tests.debug.xcconfig */,
 				05A94D121C9032A809B10A78 /* Pods-WDTouchID_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -259,6 +258,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -513,6 +513,7 @@
 			baseConfigurationReference = 0D7E0CF93E59A97B31F9253E /* Pods-WDTouchID_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WDTouchID/WDTouchID-Prefix.pch";
 				INFOPLIST_FILE = "WDTouchID/WDTouchID-Info.plist";
@@ -529,6 +530,7 @@
 			baseConfigurationReference = 21E222E0C183C9002F75F26B /* Pods-WDTouchID_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WDTouchID/WDTouchID-Prefix.pch";
 				INFOPLIST_FILE = "WDTouchID/WDTouchID-Info.plist";
