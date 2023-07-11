@@ -248,6 +248,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = jocelen;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 4V5FN48TN4;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -513,7 +516,7 @@
 			baseConfigurationReference = 0D7E0CF93E59A97B31F9253E /* Pods-WDTouchID_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4V5FN48TN4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WDTouchID/WDTouchID-Prefix.pch";
 				INFOPLIST_FILE = "WDTouchID/WDTouchID-Info.plist";
@@ -530,7 +533,7 @@
 			baseConfigurationReference = 21E222E0C183C9002F75F26B /* Pods-WDTouchID_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4V5FN48TN4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WDTouchID/WDTouchID-Prefix.pch";
 				INFOPLIST_FILE = "WDTouchID/WDTouchID-Info.plist";

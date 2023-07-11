@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WDTouchID'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'WDTouchID is a framework for quickly integrating biometric fingerprints.'
 
 # This description is used to generate tags and improve search results.

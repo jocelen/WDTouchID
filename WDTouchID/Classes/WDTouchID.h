@@ -7,19 +7,17 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 /**
  *  生物指纹状态
  */
 typedef NS_ENUM(NSUInteger, WDBiometryState){
     /// 当前设备不支持生物验证
     WDBiometryStateNotSupport = 0,
-    /// TouchID 验证成功
+    /// 生物验证 验证成功
     WDBiometryStateSuccess = 1,
-    /// TouchID 验证失败
+    /// 生物验证 验证失败
     WDBiometryStateFail = 2,
-    /// TouchID 被用户手动取消
+    /// 生物验证 被用户手动取消
     WDBiometryStateUserCancel = 3,
     /// 用户不使用生物验证,选择手动输入密码
     WDBiometryStateInputPassword = 4,
@@ -42,9 +40,8 @@ typedef NS_ENUM(NSUInteger, WDBiometryState){
 };
 
 
-
 /**
- *  生物识别特征
+ *  生物指纹类型
  */
 typedef NS_ENUM(NSUInteger, WDBiometryType){
     WDBiometryTypeNone = 0,
@@ -52,10 +49,11 @@ typedef NS_ENUM(NSUInteger, WDBiometryType){
     WDBiometryTypeFaceID = 2,
 };
 
+
+NS_ASSUME_NONNULL_BEGIN
 @interface WDTouchID : NSObject
 
 typedef void (^biometricsStateBlock)(WDBiometryState state,NSError * _Nullable error);
-
 
 /**
  *  判断是否支持Face ID / Touch ID
@@ -67,7 +65,7 @@ typedef void (^biometricsStateBlock)(WDBiometryState state,NSError * _Nullable e
 
 
 /**
- *  启动TouchID进行验证
+ *  启动生物特征进行验证
  *
  *  @param touchDesc TouchID显示的描述
  *  @param faceDesc FaceID显示的描述
@@ -75,7 +73,7 @@ typedef void (^biometricsStateBlock)(WDBiometryState state,NSError * _Nullable e
  *  @param block 回调状态的block
  *
  */
-+(void)showTouchIDWithDescribe:(NSString * _Nullable)touchDesc faceIDDescribe:(NSString * _Nullable)faceDesc authFallbackTitle:(NSString * _Nullable)backTitle blockState:(biometricsStateBlock)block;
++(void)showBiometricsAuthWithDescribe:(NSString * _Nullable)touchDesc faceIDDescribe:(NSString * _Nullable)faceDesc authFallbackTitle:(NSString * _Nullable)backTitle blockState:(biometricsStateBlock)block;
 
 @end
 

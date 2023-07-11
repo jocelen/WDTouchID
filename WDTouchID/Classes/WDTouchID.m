@@ -36,7 +36,7 @@
 }
 
 
-+(void)showTouchIDWithDescribe:(NSString * _Nullable)touchDesc faceIDDescribe:(NSString * _Nullable)faceDesc authFallbackTitle:(NSString * _Nullable)backTitle blockState:(biometricsStateBlock)block;
++(void)showBiometricsAuthWithDescribe:(NSString * _Nullable)touchDesc faceIDDescribe:(NSString * _Nullable)faceDesc authFallbackTitle:(NSString * _Nullable)backTitle blockState:(biometricsStateBlock)block;
 {
     WDBiometryType supperType = [self supportBiometricsType];
     
