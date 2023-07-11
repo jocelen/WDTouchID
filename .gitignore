@@ -1,0 +1,28 @@
+### Build generated ###
+.DS_Store
+
+
+### Xcode ###
+## User settings
+xcuserdata/
+build/
+
+
+## Xcode 8 and earlier
+*.xcscmblueprint
+*.xccheckout
+
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+**/xcshareddata/WorkspaceSettings.xcsettings
+
+### DerivedData ###
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
