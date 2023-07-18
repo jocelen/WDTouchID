@@ -63,6 +63,12 @@ typedef void (^biometricsStateBlock)(WDBiometryState state,NSError * _Nullable e
 +(WDBiometryType)supportBiometricsType;
 
 
+/**
+ *  当前设备是否能进行生物识别
+ *
+ *  @return 结果
+ */
++(BOOL)canBiometrics:(NSError * __autoreleasing *)error;
 
 /**
  *  启动生物特征进行验证

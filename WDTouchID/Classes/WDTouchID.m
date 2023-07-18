@@ -36,6 +36,12 @@
 }
 
 
++(BOOL)canBiometrics:(NSError * __autoreleasing *)error;
+{
+    LAContext *context = [[LAContext alloc] init];
+    return [context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:error];
+}
+
 +(void)showBiometricsAuthWithDescribe:(NSString * _Nullable)touchDesc faceIDDescribe:(NSString * _Nullable)faceDesc authFallbackTitle:(NSString * _Nullable)backTitle blockState:(biometricsStateBlock)block;
 {
     WDBiometryType supperType = [self supportBiometricsType];
