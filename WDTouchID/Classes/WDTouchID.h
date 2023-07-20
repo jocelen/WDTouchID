@@ -71,6 +71,13 @@ typedef void (^biometricsStateBlock)(WDBiometryState state,NSError * _Nullable e
 +(BOOL)canBiometrics:(NSError * __autoreleasing *)error;
 
 /**
+ *  生物识别标识   新增删除特征或大系统升级后都有可能变化
+ *
+ *  @return 标识
+ */
++(NSString * _Nullable)biometricsUpdateSymbol:(NSError * __autoreleasing *)error;
+
+/**
  *  启动生物特征进行验证
  *
  *  @param touchDesc TouchID显示的描述

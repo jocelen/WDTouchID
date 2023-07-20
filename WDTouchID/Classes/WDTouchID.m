@@ -42,6 +42,16 @@
     return [context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:error];
 }
 
++(NSString * _Nullable)biometricsUpdateSymbol:(NSError * __autoreleasing *)error;
+{
+    LAContext *context = [[LAContext alloc] init];
+    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:error]) {
+        NSData * base64 = [context.evaluatedPolicyDomainState base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        return base64 ? [[NSString alloc] initWithData:base64 encoding:NSUTF8StringEncoding] : nil;
+    }
+    return nil;
+}
+
 +(void)showBiometricsAuthWithDescribe:(NSString * _Nullable)touchDesc faceIDDescribe:(NSString * _Nullable)faceDesc authFallbackTitle:(NSString * _Nullable)backTitle blockState:(biometricsStateBlock)block;
 {
     WDBiometryType supperType = [self supportBiometricsType];

@@ -29,7 +29,8 @@
 
 // 加载初始配置
 -(void)loadConfig {
-    self.title = @"验证生物指纹";
+    self.title = @"验证生物识别";
+    NSLog(@"生物识别标识----%@",[WDTouchID biometricsUpdateSymbol:nil]);
 }
 
 // 添加view
