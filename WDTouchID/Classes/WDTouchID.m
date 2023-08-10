@@ -23,13 +23,13 @@
 +(WDBiometryType)supportBiometricsType;
 {
     LAContext *context = [[LAContext alloc] init];
-    NSError *error;
-    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-        if (error != nil) {
-            return WDBiometryTypeNone;
+    [context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
+    if (@available(iOS 11.0, *)) {
+        if (context.biometryType == LABiometryTypeFaceID) {
+            return WDBiometryTypeFaceID;
         }
-        if (@available(iOS 11.0, *)) {
-            return context.biometryType == LABiometryTypeFaceID ? WDBiometryTypeFaceID : WDBiometryTypeTouchID;
+        else if (context.biometryType == LABiometryTypeTouchID) {
+            return WDBiometryTypeTouchID;
         }
     }
     return WDBiometryTypeNone;
@@ -74,7 +74,6 @@
     if (@available(iOS 8.0, *)) {
         
         LAContext *context = [[LAContext alloc] init];
-        
         context.localizedFallbackTitle = backTitle == nil ? @"输入密码验证" : backTitle;
         
         NSError *error = nil;
@@ -82,93 +81,19 @@
         if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
             [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:descStr reply:^(BOOL success, NSError * _Nullable error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
                     if (success) {
                         NSLog(@"生物指纹 验证成功");
                         block(WDBiometryStateSuccess,error);
                     }
-                    else if(error) {
-                        
-                        switch (error.code) {
-                            case LAErrorAuthenticationFailed:{
-                                NSLog(@"生物指纹 验证失败");
-                                block(WDBiometryStateFail,error);
-                                break;
-                            }
-                            case LAErrorUserCancel:{
-                                NSLog(@"生物指纹 被用户手动取消");
-                                block(WDBiometryStateUserCancel,error);
-                            }
-                                break;
-                            case LAErrorUserFallback:{
-                                NSLog(@"用户不使用生物指纹,选择手动输入密码");
-                                block(WDBiometryStateInputPassword,error);
-                            }
-                                break;
-                            case LAErrorSystemCancel:{
-                                NSLog(@"生物指纹 被系统取消 (如遇到来电,锁屏,按了Home键等)");
-                                block(WDBiometryStateSystemCancel,error);
-                            }
-                                break;
-                            case LAErrorPasscodeNotSet:{
-                                NSLog(@"生物指纹 无法启动,因为用户没有设置密码");
-                                block(WDBiometryStatePasswordNotSet,error);
-                            }
-                                break;
-                            case LAErrorAppCancel:{
-                                NSLog(@"当前软件被挂起并取消了授权 (如App进入了后台等)");
-                                block(WDBiometryStateAppCancel,error);
-                            }
-                                break;
-                            case LAErrorInvalidContext:{
-                                NSLog(@"当前软件被挂起并取消了授权 (LAContext对象无效)");
-                                block(WDBiometryStateInvalidContext,error);
-                            }
-                                break;
-                            default:
-                                break;
-                        }
-                        
-                        if (@available(iOS 11.0, *))
-                        {
-                            if (error.code == LAErrorBiometryNotEnrolled) {
-                                NSLog(@"生物指纹 无法启动,因为用户没有设置");
-                                block(WDBiometryStateTouchIDNotSet,error);
-                            }
-                            else if (error.code == LAErrorBiometryNotAvailable) {
-                                NSLog(@"生物指纹 无效");
-                                block(WDBiometryStateTouchIDNotAvailable,error);
-                            }
-                            else if (error.code == LAErrorBiometryLockout) {
-                                NSLog(@"生物指纹 被锁定(连续多次验证TouchID失败,系统需要用户手动输入密码)");
-                                block(WDBiometryStateTouchIDLockout,error);
-                            }
-                        }
-                        else {
-                            if (error.code == LAErrorTouchIDNotEnrolled) {
-                                NSLog(@"生物指纹 无法启动,因为用户没有设置");
-                                block(WDBiometryStateTouchIDNotSet,error);
-                            }
-                            else if (error.code == LAErrorTouchIDNotAvailable) {
-                                NSLog(@"生物指纹 无效");
-                                block(WDBiometryStateTouchIDNotAvailable,error);
-                            }
-                            else if (error.code == LAErrorTouchIDLockout) {
-                                NSLog(@"生物指纹 被锁定(连续多次验证失败,系统需要用户手动输入密码)");
-                                block(WDBiometryStateTouchIDLockout,error);
-                            }
-                        }
-                        
+                    else {
+                        [self biometricsAuthError:error handler:block];
                     }
-                    
                 });
-                
             }];
         }
         else {
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"当前设备不支持生物指纹");
-                block(WDBiometryStateNotSupport,error);
+                [self biometricsAuthError:error handler:block];
             });
         }
     }
@@ -180,5 +105,84 @@
     }
 }
 
++(void)biometricsAuthError:(NSError * _Nullable)error handler:(biometricsStateBlock)block
+{
+    if(error) {
+        switch (error.code) {
+            case LAErrorAuthenticationFailed:{
+                NSLog(@"生物指纹 验证失败");
+                block(WDBiometryStateFail,error);
+                break;
+            }
+            case LAErrorUserCancel:{
+                NSLog(@"生物指纹 被用户手动取消");
+                block(WDBiometryStateUserCancel,error);
+            }
+                break;
+            case LAErrorUserFallback:{
+                NSLog(@"用户不使用生物指纹,选择手动输入密码");
+                block(WDBiometryStateInputPassword,error);
+            }
+                break;
+            case LAErrorSystemCancel:{
+                NSLog(@"生物指纹 被系统取消 (如遇到来电,锁屏,按了Home键等)");
+                block(WDBiometryStateSystemCancel,error);
+            }
+                break;
+            case LAErrorPasscodeNotSet:{
+                NSLog(@"生物指纹 无法启动,因为用户没有设置密码");
+                block(WDBiometryStatePasswordNotSet,error);
+            }
+                break;
+            case LAErrorAppCancel:{
+                NSLog(@"当前软件被挂起并取消了授权 (如App进入了后台等)");
+                block(WDBiometryStateAppCancel,error);
+            }
+                break;
+            case LAErrorInvalidContext:{
+                NSLog(@"当前软件被挂起并取消了授权 (LAContext对象无效)");
+                block(WDBiometryStateInvalidContext,error);
+            }
+                break;
+            default:
+                break;
+        }
+        
+        if (@available(iOS 11.0, *))
+        {
+            if (error.code == LAErrorBiometryNotEnrolled) {
+                NSLog(@"生物指纹 无法启动,因为用户没有设置");
+                block(WDBiometryStateTouchIDNotSet,error);
+            }
+            else if (error.code == LAErrorBiometryNotAvailable) {
+                NSLog(@"生物指纹 无效");
+                block(WDBiometryStateTouchIDNotAvailable,error);
+            }
+            else if (error.code == LAErrorBiometryLockout) {
+                NSLog(@"生物指纹 被锁定(连续多次验证TouchID失败,系统需要用户手动输入密码)");
+                block(WDBiometryStateTouchIDLockout,error);
+            }
+        }
+        else {
+            if (error.code == LAErrorTouchIDNotEnrolled) {
+                NSLog(@"生物指纹 无法启动,因为用户没有设置");
+                block(WDBiometryStateTouchIDNotSet,error);
+            }
+            else if (error.code == LAErrorTouchIDNotAvailable) {
+                NSLog(@"生物指纹 无效");
+                block(WDBiometryStateTouchIDNotAvailable,error);
+            }
+            else if (error.code == LAErrorTouchIDLockout) {
+                NSLog(@"生物指纹 被锁定(连续多次验证失败,系统需要用户手动输入密码)");
+                block(WDBiometryStateTouchIDLockout,error);
+            }
+        }
+        
+    }
+    else {
+        NSLog(@"当前设备不支持生物指纹");
+        block(WDBiometryStateNotSupport,nil);
+    }
+}
 
 @end

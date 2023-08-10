@@ -30,7 +30,7 @@
 // 加载初始配置
 -(void)loadConfig {
     self.title = @"验证生物识别";
-    NSLog(@"生物识别标识----%@",[WDTouchID biometricsUpdateSymbol:nil]);
+    NSLog(@"生物识别签名标识----%@",[WDTouchID biometricsUpdateSymbol:nil]);
 }
 
 // 添加view
@@ -45,6 +45,7 @@
 
 - (void)touchVerification {
     
+    NSLog(@"生物识别类型----%ld",[WDTouchID supportBiometricsType]);
     [WDTouchID showBiometricsAuthWithDescribe:@"生物识别测试" faceIDDescribe:nil authFallbackTitle:nil blockState:^(WDBiometryState state, NSError *error) {
         
         if (state == WDBiometryStateNotSupport) {    //不支持TouchID

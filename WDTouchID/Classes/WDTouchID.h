@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, WDBiometryState){
     WDBiometryStateAppCancel = 10,
     /// 当前软件被挂起并取消了授权 (LAContext对象无效)
     WDBiometryStateInvalidContext = 11,
-    /// 系统版本不支持TouchID (必须高于iOS 8.0才能使用)
+    /// 系统版本不支持生物验证 (必须高于iOS 8.0才能使用)
     WDBiometryStateVersionNotSupport = 12
 };
 
