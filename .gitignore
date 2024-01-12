@@ -1,12 +1,16 @@
 ### Build generated ###
 .DS_Store
-
+.svn/
 
 ### Xcode ###
 ## User settings
 xcuserdata/
 build/
-
+.idea/
+xcschememanagement.plist
+xcuserdata/
+UserInterface.xcuserstate
+UserInterfaceState.xcuserstate
 
 ## Xcode 8 and earlier
 *.xcscmblueprint
@@ -26,3 +30,4 @@ build/
 *.ipa
 *.dSYM.zip
 *.dSYM
+*.iml
